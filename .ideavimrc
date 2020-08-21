@@ -1,0 +1,41 @@
+set surround
+set multiple-cursors
+set commentary
+set number relativenumber
+set scrolloff=10
+
+" noremap <S-l> gt
+" noremap <S-h> gT
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+set clipboard=unnamed
+
+command! W write
+command! Q quit
+
+nmap ; :
+
+set ignorecase
+set smartcase
+set hlsearch
+
+noremap <C-r> :redo<Enter>
+
+let mapleader=" "
+noremap <leader>g :action Generate<Enter>
+noremap <leader>c :action NewClass<Enter>
+noremap <leader>r :action Run<Enter>
+
+command! Format action ReformatCode 
+noremap <leader>f :action ReformatCode<Enter>
+noremap <leader>s :action Switcher<Enter>
+noremap <leader>i :action ShowIntentionActions<Enter>
+noremap <leader>a :action GotoAction<Enter>
+noremap <leader>n :action ViewNavigationBar<Enter>
+
+"viewmenu -> main menu
+"shift+escape -> minimize window
