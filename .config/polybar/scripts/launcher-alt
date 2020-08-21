@@ -1,0 +1,6 @@
+#!/bin/bash
+
+## Created By Aditya Shakya
+
+# rofi -modi run,drun -show run -line-padding 4 -columns 2 -width 40 -padding 30 -hide-scrollbar -show-icons -drun-icon-theme "Papirus" -theme ~/.config/rofi/solarized.rasi 
+rofi -modi combi -combi-modi drun,run -show combi -terminal "kitty" -line-padding 4 -columns 2 -width 40 -padding 30 -hide-scrollbar -show-icons -drun-icon-theme "Papirus" -theme ~/.config/rofi/dracula.rasi 

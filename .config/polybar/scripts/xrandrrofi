@@ -1,0 +1,27 @@
+#!/bin/bash
+
+MENU="$(rofi -sep "|" -dmenu -i -p 'Xrandr' -location 3 -xoffset -10 -yoffset 32 -width 10 -hide-scrollbar -line-padding 4 -padding 20 -lines 5 -theme /home/near/.config/rofi/dracula.rasi <<< "1) Connect  |2) Connect  |3) Connect  |4) Disconnect   |5) Disconnect ")"
+            case "$MENU" in
+                *1*)  
+									xrandr --output HDMI1 --auto --above eDP1 
+									sleep 3
+									i3-msg restart
+									pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:hdmi-stereo
+									;;
+                *2*)  
+									xrandr --output HDMI1 --auto --above eDP1 
+									sleep 3
+									i3-msg restart
+									;;
+                *3*)  
+									pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:hdmi-stereo
+									;;
+                *4*) 
+									xrandr --output HDMI1 --off   
+									sleep 3
+									i3-msg restart
+									pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo
+									;;
+                *5*) 
+									pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo
+            esac

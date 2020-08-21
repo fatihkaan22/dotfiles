@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MENU="$(rofi -sep "|" -dmenu -i -p 'Display' -location 3 -xoffset -10 -yoffset 32 -width 10 -hide-scrollbar -line-padding 2 -padding 20 -lines 5 -theme /home/near/.config/rofi/dracula.rasi <<< "1) |2) ")"
+            case "$MENU" in
+                *1*)  
+									java -jar /home/near/opt/schreenshot-qr.jar 1
+									;;
+                *2*)  
+									java -jar /home/near/opt/schreenshot-qr.jar 2
+            esac
