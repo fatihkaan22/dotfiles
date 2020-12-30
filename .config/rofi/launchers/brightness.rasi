@@ -38,8 +38,8 @@ configuration {
 }
 
 * {
-  background-color: @background;
-  text-color: @foreground;
+  background-color: @bg;
+  text-color: @fg;
   font: @text-font;
 }
 
@@ -47,7 +47,7 @@ inputbar,
 prompt,
 textbox-prompt-colon,
 entry {
-  background-color: @background-light;
+  background-color: @se;
 }
 
 #inputbar {

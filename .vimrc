@@ -63,6 +63,7 @@ endif
 		" Plug 'fisadev/FixedTaskList.vim'
 		Plug 'KeitaNakamura/tex-conceal.vim'
 		Plug 'dart-lang/dart-vim-plugin'
+		Plug 'frazrepo/vim-rainbow'
 call plug#end()
 
 call glaive#Install()
@@ -164,7 +165,7 @@ map <F8> :setlocal spell! spelllang=en<CR>
 map <F9> :set spelllang=tr<CR>
 
 " autocompile
-" autocmd BufWritePost 171044009.c !make
+" autocmd BufWritePost hw.cpp !make
 autocmd BufWritePost ~/.Xresources !xrdb ~/.Xresources
 
 autocmd BufWritePost,FileWritePost *.dot :silent !dot -Tpng % -o %:r.png
@@ -197,76 +198,10 @@ let g:limelight_conceal_ctermfg = 240
 " default: 0
 let g:mkdp_auto_start = 1
 
-"MARKDOWN PREW
-  noremap <silent> <leader>om :call OpenMarkdownPreview()<cr>
-
-  function! OpenMarkdownPreview() abort
-    if exists('s:markdown_job_id') && s:markdown_job_id > 0
-      call jobstop(s:markdown_job_id)
-      unlet s:markdown_job_id
-    endif
-    let available_port = system(
-      \ "lsof -s tcp:listen -i :40500-40800 | awk -F ' *|:' '{ print $10 }' | sort -n | tail -n1"
-      \ ) + 1
-    if available_port == 1 | let available_port = 40500 | endif
-    let s:markdown_job_id = jobstart('grip ' . shellescape(expand('%:p')) . ' :' . available_port)
-    if s:markdown_job_id <= 0 | return | endif
-    call system('firefox http://localhost:' . available_port . '&')
-  endfunction
-
 let g:gruvbox_italic=1
-
-" let g:ycm_filetype_blacklist = {
-"       \ 'tagbar': 1,
-"       \ 'notes': 1,
-"       \ 'netrw': 1,
-"       \ 'unite': 1,
-"       \ 'text': 1,
-"       \ 'vimwiki': 1,
-"       \ 'infolog': 1,
-"       \ 'mail': 1
-"       \}
 
 autocmd FileType markdown nmap <silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
-" nnoremap <silent> <leader>p :call SaveFile()<cr>
-" function! SaveFile() abort"{{{
-"   let targets = filter(
-"         \ systemlist('xclip -selection clipboard -t TARGETS -o'),
-"         \ 'v:val =~# ''image''')
-"   if empty(targets) | return | endif
-
-"   let outdir = expand('%:p:h') . '/img'
-"   if !isdirectory(outdir)
-"     call mkdir(outdir)
-"   endif
-
-"   let mimetype = targets[0]
-"   let extension = split(mimetype, '/')[-1]
-"   let tmpfile = outdir . '/savefile_tmp.' . extension
-"   call system(printf('xclip -selection clipboard -t %s -o > %s',
-"         \ mimetype, tmpfile))
-
-"   let cnt = 0
-"   let filename = outdir . '/image' . cnt . '.' . 'png'
-"   while filereadable(filename)
-"     call system('diff ' . tmpfile . ' ' . filename)
-"     if !v:shell_error
-"       call delete(tmpfile)
-"       break
-"     endif
-
-"     let cnt += 1
-"     let filename = outdir . '/image' . cnt . '.' . 'png'
-"   endwhile
-
-"   if filereadable(tmpfile)
-"     call rename(tmpfile, filename)
-"   endif
-
-"   let @* = '![image-' . cnt . '](' . fnamemodify(filename, ':.') . ')'
-"   normal! "*p
-" endfunction"}}}
 
 " compile c++ cpp
 " autocmd BufWritePost *.cpp !g++ -o  %:r.out % -std=c++11
@@ -315,7 +250,6 @@ noremap <S-h> gT
 
 noremap <c-g> :Goyo<Enter>
 
-
 " transparent vim
 hi Normal guibg=NONE ctermbg=NONE
 
@@ -343,17 +277,6 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-"CamelCaseMotion
-" map <silent> w <Plug>CamelCaseMotion_w
-" map <silent> b <Plug>CamelCaseMotion_b
-" map <silent> e <Plug>CamelCaseMotion_e
-" map <silent> ge <Plug>CamelCaseMotion_ge
-" sunmap w
-" sunmap b
-" sunmap e
-" sunmap ge
-
-" let g:mkdp_browser = 'qutebrowser'
 " let g:mkdp_markdown_css = '/home/near/Downloads/github-dark.css'
 let g:mkdp_highlight_css = '/home/near/opt/ayu-highlight.css'
 let g:mkdp_auto_start = 0
@@ -382,8 +305,6 @@ let g:vimtex_quickfix_mode = 0
 
 " let maplocalleader="\<space>"
 let g:tex_flavor = "latex"
-
-
 
 " Neomake ------------------------------
 
@@ -423,87 +344,6 @@ nmap ,F :Lines<CR>
 nmap ,wF :execute ":Lines " . expand('<cword>')<CR>
 " commands finder mapping
 nmap ,c :Commands<CR>
-
-"" FZF
-
-" general
-let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
-let $FZF_DEFAULT_OPTS="--reverse " " top to bottom
-
-" floating fzf window with borders
-function! CreateCenteredFloatingWindow()
-    let width = min([&columns - 4, max([80, &columns - 20])])
-    let height = min([&lines - 4, max([20, &lines - 10])])
-    let top = ((&lines - height) / 2) - 1
-    let left = (&columns - width) / 2
-    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
-
-    let top = "╭" . repeat("─", width - 2) . "╮"
-    let mid = "│" . repeat(" ", width - 2) . "│"
-    let bot = "╰" . repeat("─", width - 2) . "╯"
-    let lines = [top] + repeat([mid], height - 2) + [bot]
-    let s:buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-    call nvim_open_win(s:buf, v:true, opts)
-    set winhl=Normal:Floating
-    let opts.row += 1
-    let opts.height -= 2
-    let opts.col += 2
-    let opts.width -= 4
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-    au BufWipeout <buffer> exe 'bw '.s:buf
-endfunction
-
-" use rg by default
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
-
-
-" Files + devicons + floating fzf
-function! Fzf_dev()
-  let l:fzf_files_options = '--preview "bat --line-range :'.&lines.' --theme="OneHalfDark" --style=numbers,changes --color always {2..-1}" --expect=ctrl-v,ctrl-x,ctrl-t'
-  function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    return s:prepend_icon(l:files)
-  endfunction
-
-  function! s:prepend_icon(candidates)
-    let l:result = []
-    for l:candidate in a:candidates
-      let l:filename = fnamemodify(l:candidate, ':p:t')
-      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-      call add(l:result, printf('%s %s', l:icon, l:candidate))
-    endfor
-
-    return l:result
-  endfunction
-
-    function! s:edit_file(lines)
-        if len(a:lines) < 2 | return | endif
-
-        let l:cmd = get({'ctrl-x': 'split',
-                         \ 'ctrl-v': 'vertical split',
-                         \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
-
-        for l:item in a:lines[1:]
-            let l:pos = stridx(l:item, ' ')
-            let l:file_path = l:item[pos+1:-1]
-            execute 'silent '. l:cmd . ' ' . l:file_path
-        endfor
-    endfunction
-
-    call fzf#run({
-        \ 'source': <sid>files(),
-        \ 'sink*':   function('s:edit_file'),
-        \ 'options': '-m --reverse ' . l:fzf_files_options,
-        \ 'down':    '40%',
-        \ 'window': 'call CreateCenteredFloatingWindow()'})
-
-endfunction
-
 
 " Tasklist ------------------------------
 
@@ -561,5 +401,3 @@ hi Conceal ctermbg=none
 autocmd FileType * set concealcursor-=n
 set concealcursor-=n
 set concealcursor-=i
-
-

@@ -7,9 +7,10 @@
  *
  */
 
-@import "colors.rasi"
+@import "/home/near/.config/rofi/themes/colors.rasi"
 
 /* ########### */
+
 
 * {
   /* General */
@@ -24,13 +25,13 @@
   menu-prompt-padding:                   10px 20px 10px 20px;
   menu-prompt-margin:                    0px 0px 0px -2px;
   menu-element-border:                   10px;
-  menu-element-padding:                  4px 8px -1px -40px;
+  menu-element-padding:                  0px 8px 22px -8px;
 }
 
 /* ########### */
 
 #window {
-  width: 34%;
+  width: 29%;
   height: 15%;
 }
 
@@ -60,9 +61,9 @@
 /* ########### */
 
 * {
-  font: @text-font;
 }
 #window {
+  font: @text-font;
   padding: @menu-window-padding;
   children: [ inputbar, horibox ];
 }
@@ -72,6 +73,7 @@
 }
 prompt,
 textbox-prompt-colon {
+  font: @text-font;
   padding: @menu-prompt-padding;
   border: 2px;
   border-color: @accent;
@@ -122,3 +124,6 @@ element.selected.active {
   border-color: @accent;
 }
 
+/* element-icon { */ 
+/* 	size: 63px; */
+/* } */

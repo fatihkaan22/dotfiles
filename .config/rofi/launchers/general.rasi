@@ -1,88 +1,115 @@
-/* vim:ft=css */
+/*
+ *
+ * Author  : Aditya Shakya
+ * Mail    : adi1090x@gmail.com
+ * Github  : @adi1090x
+ * Twitter : @adi1090x
+ *
+ */
 
 configuration {
-    drun-display-format: "{icon} {name}";
-	show-icons: true;
-	icon-theme: "Papirus";
-	location: 0;
-	yoffset: 0;
-    xoffset: 0;
-	columns: 2;
-	fake-transparency: false;
-	hide-scrollbar: true;
-	bw: 0;
-    fullscreen: false;
-    show-icons: true;
-	terminal: "kitty";
-	sidebar-mode: false;
+	font:							"Noto Sans 12";
+    show-icons:                     true;
+	icon-theme: 					"Papirus";
+    display-drun: 					"";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
 }
 
-@import "colors.rasi"
+@import "/home/near/.config/rofi/launchers/colors.rasi"
 
-* {
-  text-font:                            "Noto Sans 12";
-
-  inputbar-margin:                      3px 3px;
-  prompt-padding:                       10px 10px;
-  entry-padding:                        10px 0px 10px 0px;
-  list-element-padding:                 10px;
-  list-element-margin:                  @inputbar-margin;
-  list-element-border:                  0px 0px 0px 4px;
-
-  apps-textbox-prompt-colon-padding:    10px -5px 0px 0px;
+window {
+    transparency:                   "real";
+    background-color:               @bg;
+    text-color:                     @fg;
+	border:							0px;
+	border-color:					@ac;
+    border-radius:                  0px;
 }
 
-#window {
-	/* height: 170; */
-	/* width: 250; */
-  padding: 9;
+prompt {
+    enabled: 						true;
+	padding: 						1% 0.75% 1% 0.75%;
+	background-color: 				@ac;
+	text-color: 					black;
+	font:							"Noto Sans 12";
 }
 
-* {
-  background-color: @background;
-  text-color: @foreground;
-  font: @text-font;
+textbox-prompt-colon {
+	padding: 						1% 0% 1% 0%;
+	background-color: 				@se;
+	text-color: 					@fg;
+	expand: false;
+	str: " :: ";
 }
 
-inputbar,
-prompt,
-textbox-prompt-colon,
 entry {
-  background-color: @background-light;
+    background-color:               @al;
+    text-color:                     @fg;
+    placeholder-color:              @fg;
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "";
+		padding: 						1.15% 0.5% 1% 0.5%;
+    blink:                          true;
 }
 
-#inputbar {
-  children: [ prompt, textbox-prompt-colon, entry ];
-  margin: @inputbar-margin;
+inputbar {
+	children: 						[ prompt, entry ];
+    background-color:               @se;
+    text-color:                     @fg;
+    expand:                         false;
+	border:							0% 0% 0% 0%;
+    border-radius:                  0px;
+	border-color:					@ac;
 }
 
-#prompt {
-  padding: @prompt-padding;
-  background-color: @accent;
-  text-color: @background;
+listview {
+    background-color:               @al;
+    padding:                        0px;
+    padding:                        0px;
+    spacing:                       	1%;
+    cycle:                          false;
+    dynamic:                        true;
+    layout:                         vertical;
 }
 
-#textbox-prompt-colon {
-  expand: false;
-  str: "  ::  ";
-  padding: @apps-textbox-prompt-colon-padding;
+mainbox {
+    background-color:               @al;
+	border:							0% 0% 0% 0%;
+    border-radius:                  0% 0% 0% 0%;
+	border-color:					@ac;
+    children:                       [ inputbar, listview ];
+    padding:                        2% 1% 2% 1%;
 }
 
-#entry {
-  text-color: @accent;
-  padding: @entry-padding;
+element {
+    background-color:               @se;
+    text-color:                     @fg;
+    orientation:                    horizontal;
+    border-radius:                  0%;
+    padding:                        1% 0.5% 1% 0.75%;
 }
 
-#element {
-  padding: @list-element-padding;
-  margin: @list-element-margin;
-  border: @list-element-border;
-  background-color: @background-light;
-  border-color: @background-light;
+element-icon {
+    size:                           24px;
+    border:                         0px;
 }
 
-#element.selected {
-  background-color: @background-focus;
-  text-color: @accent;
-  border-color: @accent;
+element-text {
+    expand:                         true;
+    horizontal-align:               0;
+    vertical-align:                 0.5;
+    margin:                         0% 0.25% 0% 0.25%;
+}
+
+element selected {
+    background-color:               @se;
+    text-color:                     @ac;
+	border:							0% 0% 0% 0.3%;
+    border-radius:                  0px;
+    border-color:                  	@ac;
 }

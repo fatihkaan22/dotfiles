@@ -8,28 +8,29 @@
  */
 
 configuration {
-    drun-display-format: "{icon} {name}";
-    display-drun: "";
-    display-combi: "Applications";
+	drun-display-format: "{icon} {name}";
+	display-drun: "";
+	display-combi: "Applications";
 	show-icons: true;
 	icon-theme: "Papirus";
 	location: 0;
 	yoffset: 0;
-    xoffset: 0;
+	xoffset: 0;
 	columns: 2;
 	fake-transparency: false;
 	hide-scrollbar: true;
 	bw: 0;
-    fullscreen: false;
-    show-icons: true;
+	fullscreen: false;
+	show-icons: true;
 	terminal: "kitty";
 	sidebar-mode: false;
 }
 
-@import "colors.rasi"
+@import "/home/near/.config/rofi/launchers/colors.rasi"
 
 * {
   text-font:                            "Noto Sans 12";
+  icon-font:                            "Noto Sans 22";
 
   inputbar-margin:                      3px 3px;
   prompt-padding:                       10px 10px;
@@ -45,6 +46,7 @@ configuration {
   width: 50%;
   height: 50%;
   padding: 40px 40px;
+  font: @icon-font;
 }
 
 * {

@@ -14,7 +14,7 @@
 # style_normal_grid_round    style_normal_purple    style_normal_purple_alt    style_normal_rainbow
 # style_normal_rainbow_sidebar
 
-style="style_normal_grid"
+style="style_8"
 
 # rofi -no-lazy-grab -show drun -theme launchers/"$style".rasi
-rofi -modi combi -combi-modi drun,run -show combi -terminal "kitty" -theme launchers/"$style".rasi
+rofi -modi combi -combi-modi drun,run -show combi -terminal "kitty" -theme /home/near/.config/rofi/launchers/style_8.rasi

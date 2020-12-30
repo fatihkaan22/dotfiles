@@ -127,6 +127,8 @@ alias remove-orphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias et="translate-et.sh"
 alias te="translate-te.sh"
 alias please='sudo $(fc -ln -1)'
+alias s='w3m -dump file:///home/near/Documents/lectures/uni-3/program.html'
+alias icat="kitty +kitten icat"
 
 #vim man pages
 export PATH="$PATH:$HOME/.vim/bundle/vim-superman/bin"
@@ -166,4 +168,12 @@ export LC_ALL=en_US.UTF8
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source /opt/ros/noetic/setup.zsh
+ranger() {
+    if [ -z "$RANGER_LEVEL" ]; then
+        /usr/bin/ranger "$@"
+    else
+        exit
+    fi
+}
+
+# source /opt/ros/noetic/setup.zsh

@@ -302,7 +302,9 @@
 		appname = Musixmatch
 		#ignore
    	format = ""
-
+[Telegram]
+		appname = Telegram Desktop
+		timeout = 1
 [MyTranslator]
 		appname = MyTranslator
 	  background = "#1a73e8"
