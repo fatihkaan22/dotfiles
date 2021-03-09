@@ -42,6 +42,8 @@ bindsym $mod+a exec --no-startup-id polybar-msg cmd toggle
 # bindsym $mod+i exec --no-startup-id compton-invert-toggle.sh 
 
 bindsym $mod+y exec translate-selected.sh
+bindsym $mod+Shift+bracketleft exec switch-tty2-tty7.sh
+bindsym $mod+bracketleft exec swap-workspace.sh
 
 # launch categorized menu
 # bindsym $mod+z exec --no-startup-id morc_menu
@@ -221,7 +223,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 # assign [class="Skype"] $ws5
 # assign [class="Foxit"] $ws5 
 # assign [class="Deluge"] $ws6
-assign [class="Mailspring"] $ws4
+# assign [class="Mailspring"] $ws4
 # for_window [class="Spotify"] move to workspace $ws8
 # needed for gaps
 # for_window [class=".*"] border pixel 0
@@ -264,6 +266,8 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="firefox"] border none
+for_window [title="flameshot"] floating enable border pixel 4
+for_window [title="HexGame"] floating enable border pixel 4
 
 
 # switch to workspace with urgent window automatically
@@ -409,6 +413,9 @@ set_from_resource $term_color15    color15
 gaps inner 14
 gaps outer -2
 
+# workspace $ws5 gaps inner 0
+# workspace $ws5 gaps outer 0
+
 workspace $ws2 gaps inner 0
 workspace $ws2 gaps outer 0
 
@@ -537,7 +544,7 @@ bindsym $mod+m exec i3-input -F 'mark %s' -l 1  -P 'Mark: '
 # read 1 character and go to the window with the character
 bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
-bindsyxm $mod+Shift+f focus parent; fullscreen; focus child
+bindsym $mod+Shift+f focus parent; fullscreen; focus child
 
 
 bindsym $mod+F1 exec monitor-brightness.sh
