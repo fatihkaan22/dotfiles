@@ -268,6 +268,8 @@ for_window [class="feh"] floating enable
 for_window [class="firefox"] border none
 for_window [title="flameshot"] floating enable border pixel 4
 for_window [title="HexGame"] floating enable border pixel 4
+for_window [title="Tutorial*"] floating enable border pixel 4
+for_window [title="GTU CSE461"] floating enable border pixel 4 move position center
 
 
 # switch to workspace with urgent window automatically
@@ -358,7 +360,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id xset dpms 1800 1800 1800 
 exec --no-startup-id xset s 1800 1800 
 exec --no-startup-id /home/near/.scripts/touchpad-config.sh
-exec --no-startup-id xrandr --output HDMI1 --mode 1920x1080 --auto --right-of eDP1
+exec --no-startup-id xrandr --output HDMI1 --mode 1920x1080 --auto --left-of eDP1
 # exec --no-startup-id redshift-gtk
 exec --no-startup-id copyq
 
@@ -512,7 +514,7 @@ exec "setxkbmap -layout us,tr -option"
 
 # bind ctrl+print screen focused window
 
-bindsym Ctrl+Print exec "scrot -u '/tmp/%Y%m%d_%H%M%S.png' -e 'xclip -selection c -t image/png < $f' && sleep 1 && notify-send -t 1 'Screenshot of focues window copied to clipboard'"
+bindsym Ctrl+Print exec "scrot -u '/tmp/%Y%m%d_%H%M%S.png' -e 'xclip -selection c -t image/png < $f' && sleep 1 && notify-send 'Screenshot of focues window copied to clipboard'"
 
 # swap esc and escape
 # exec 'setxkbmap -option "caps:swapescape"'
