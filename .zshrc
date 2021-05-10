@@ -130,6 +130,10 @@ alias please='sudo $(fc -ln -1)'
 alias s='w3m -dump file:///home/near/Documents/lectures/uni-3/program.html'
 alias icat="kitty +kitten icat"
 alias octave="octave -q"
+alias light="kitty @ set-colors -a '~/.config/kitty/kitty-themes/themes/AtomOneLight.conf'"
+alias dracula='kitty @ set-colors -a "~/.config/kitty/theme.conf"'
+alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
+alias f="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
 #vim man pages
 export PATH="$PATH:$HOME/.vim/bundle/vim-superman/bin"
