@@ -2,25 +2,27 @@ set nocompatible
 
 filetype off                  " required
 call plug#begin('~/.vim/plugged')
+if has('nvim')
+		Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+		Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+		" Plug 'lukas-reineke/indent-blankline.nvim'
+		" Plug 'kdav5758/TrueZen.nvim'
+else
+		Plug 'Shougo/deoplete.nvim'
+		Plug 'roxma/nvim-yarp'
+		Plug 'roxma/vim-hug-neovim-rpc'
+endif
 		Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 		Plug 'lervag/vimtex'
 		Plug 'lambdalisue/suda.vim' 
 		Plug 'tpope/vim-commentary'
-		if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
  		Plug 'itchyny/lightline.vim'
+		Plug 'tpope/vim-fugitive'
 		" Plug 'deoplete-plugins/deoplete-jedi'
-		Plug 'vimwiki/vimwiki'
 		Plug 'wakatime/vim-wakatime'
 		Plug 'michaeljsmith/vim-indent-object'
 		Plug 'Yggdroot/indentLine'
 		Plug 'Shougo/context_filetype.vim'
-		Plug 'jeetsukumaran/vim-indentwise'
 		Plug 'neomake/neomake'
 		Plug 'ryanoasis/vim-devicons'
 		Plug 'https://github.com/dracula/vim'
@@ -107,7 +109,7 @@ syntax enable
 
 compiler gcc
 
-color dracula
+
 
 "{{{ Open URL in browser
 function! Browser ()
@@ -251,7 +253,7 @@ noremap <S-h> gT
 noremap <c-g> :Goyo<Enter>
 
 " transparent vim
-hi Normal guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
 
 
 " let g:airline#extensions#tabline#enabled = 1
@@ -262,7 +264,7 @@ set foldlevelstart=20
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 " let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
+" let g:deoplete#enable_smart_case = 1
 " complete with words from any opened file
 let g:context_filetype#same_filetypes = {}
 let g:context_filetype#same_filetypes._ = '_'
@@ -293,8 +295,9 @@ let g:jekyll_path = "/home/near/git/fatihkaan22.github.io"
 vmap <Space>t :<c-u>call Turkish_Deasciify()<CR>
 
 autocmd FileType markdown let g:indentLine_enabled=0
+let g:indentLine_char = '▏'
 
-let g:polyglot_disabled = ['latex']
+" let g:polyglot_disabled = ['latex']
 
 let g:vimtex_view_method = 'zathura'
 
@@ -401,3 +404,19 @@ hi Conceal ctermbg=none
 autocmd FileType * set concealcursor-=n
 set concealcursor-=n
 set concealcursor-=i
+
+" let g:rainbow_active = 1
+
+:command Gadd Git add %
+nmap <leader>gs :G<CR>
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gd :Gdiffsplit<CR>
+nmap <leader>ga :G add %<CR>
+nmap <leader>gc :Git commit<CR>
+nmap <leader>gp :Git push<CR>
+
+" set bg=light
+set bg=dark
+" color one
+color dracula
