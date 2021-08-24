@@ -25,6 +25,14 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+lua << EOF
+  require("todo-comments").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 endif

@@ -5,7 +5,7 @@
 ## Github : @adi1090x
 ## Reddit : @adi1090x
 
-rofi_command="rofi -theme themes/powermenu.rasi"
+rofi_command="rofi -theme themes/powermenu.rasi -config /home/near/.config/rofi/config-applet.rasi"
 uptime=$(uptime -p | sed -e 's/up //g')
 
 # Options

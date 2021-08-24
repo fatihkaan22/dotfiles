@@ -78,7 +78,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages colorize extract zsh-256color zsh-syntax-highlighting zsh-autosuggestions vi-mode)
+# plugins=(colored-man-pages colorize extract zsh-256color zsh-syntax-highlighting zsh-autosuggestions vi-mode)
+plugins=(colorize extract zsh-256color zsh-syntax-highlighting zsh-autosuggestions vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,12 +109,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-HISTSIZE=10000
-HISTFILESIZE=20000
+HISTSIZE=1000000
+# HISTFILESIZE=20000
 
 # source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-alias v='nvim'
-alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias v='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
+# alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias r='ranger'
 alias c="bc -lq"
 alias n="ncpamixer"
 alias rm="trash-put"
@@ -131,9 +133,11 @@ alias s='w3m -dump file:///home/near/Documents/lectures/uni-3/program.html'
 alias icat="kitty +kitten icat"
 alias octave="octave -q"
 alias light="kitty @ set-colors -a '~/.config/kitty/kitty-themes/themes/AtomOneLight.conf'"
-alias dracula='kitty @ set-colors -a "~/.config/kitty/theme.conf"'
+alias dracula='kitty @ set-colors -a "~/.config/kitty/dracula.conf"'
 alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
 alias f="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias d="theme.sh dark"
+alias l="theme.sh light"
 
 #vim man pages
 export PATH="$PATH:$HOME/.vim/bundle/vim-superman/bin"

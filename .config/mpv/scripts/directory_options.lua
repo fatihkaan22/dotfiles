@@ -12,8 +12,8 @@ function directory_options()
 		mp.msg.warn(fullpath)
     
     if string.find(fullpath, "/home/near/wd-linux/torrents", 0, 27) ~= nil then
-        mp.set_property_bool("fullscreen", true)
-        mp.set_property("fs-screen", 1)
+        -- mp.set_property_bool("fullscreen", true)
+        -- mp.set_property("fs-screen", 1)
     end
     
 end

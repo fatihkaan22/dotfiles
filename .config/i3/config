@@ -29,7 +29,8 @@ font pango:fa-regular-400 0
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec kitty --single-instance
+bindsym $mod+Shift+Return exec kitty --single-instance --class float-kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -37,7 +38,7 @@ bindsym $mod+Shift+q kill
 # start program launcher
 # bindsym $mod+d exec --no-startup-id dmenu_recency
 bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/launcher.sh
-bindsym $mod+w exec --no-startup-id ~/.config/polybar/scripts/windows
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/polybar/scripts/windows
 bindsym $mod+a exec --no-startup-id polybar-msg cmd toggle
 # bindsym $mod+i exec --no-startup-id compton-invert-toggle.sh 
 
@@ -66,8 +67,8 @@ exec --no-startup-id pa-applet
 
 # Start Applications
 bindsym $mod+Ctrl+b exec kitty -e 'bmenu'
-bindsym $mod+apostrophe exec kitty -e 'ranger'
-bindsym $mod+Shift+apostrophe exec kitty --class float-kitty ranger
+bindsym $mod+apostrophe exec kitty --single-instance -e 'ranger'
+bindsym $mod+Shift+apostrophe exec kitty --single-instance --class float-kitty ranger
 #bindsym $mod+F5 exec terminal -e 'mocp'
 #bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
@@ -79,6 +80,7 @@ bindsym $mod+x exec  flameshot gui
 # bindsym $mod+c exec  flameshot gui --path /home/near/Documents/comic-dict/
 bindsym $mod+c exec i3-msg move position center 
 bindsym $mod+z exec i3-msg move position mouse 
+bindsym $mod+Shift+z exec mouse-up.sh
 # bindsym $mod+g exec  flameshot gui --path /home/near/Documents/general-dict/
 #bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
@@ -146,7 +148,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # toggle sticky
-bindsym $mod+Shift+s sticky toggle
+#bindsym $mod+Shift+s sticky toggle
 
 # focus the parent container
 bindsym $mod+o focus parent
@@ -217,6 +219,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 
 # Open applications on specific workspaces
+assign [class="Telegram*"] $ws4
+for_window [title="Telegram*"] no_focus
 # assign [class="Thunderbird"] $ws1
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
@@ -229,12 +233,11 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 # for_window [class=".*"] border pixel 0
 
 for_window [class="GLMatrix"] fullscreen enable
-for_window [class="com-company-Main"] floating enable border normal
+# for_window [class="com-company-Main"] floating enable border normal
 for_window [title="Microsoft Teams Notification*"] floating enable
 for_window [class="float-kitty"] floating enable
 for_window [class="float-kitty"] resize set width 900, resize set height 500;
 for_window [class="float-kitty"] move position center
-bindsym $mod+Shift+Return exec kitty --class float-kitty
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border normal
 for_window [class="calamares"] floating enable border normal
@@ -267,9 +270,10 @@ for_window [class="Xfburn"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="firefox"] border none
 for_window [title="flameshot"] floating enable border pixel 4
-for_window [title="HexGame"] floating enable border pixel 4
-for_window [title="Tutorial*"] floating enable border pixel 4
-for_window [title="GTU CSE461"] floating enable border pixel 4 move position center
+for_window [title="Figure 1"] floating enable border normal
+# for_window [title="HexGame"] floating enable border pixel 4
+# for_window [title="Tutorial*"] floating enable border pixel 4
+# for_window [title="GTU CSE461"] floating enable border pixel 4 move position center
 
 
 # switch to workspace with urgent window automatically
@@ -333,7 +337,7 @@ mode "resize" {
 
 # Autostart applications
 exec --no-startup-id /home/near/.scripts/sudo-passwordless-helpers/start-monitor-control.sh
-exec --no-startup-id xidle -timeout 600 -program /home/near/.scripts/unimatrixScreensaver.sh
+# exec --no-startup-id xidle -timeout 600 -program /home/near/.scripts/unimatrixScreensaver.sh
 exec --no-startup-id unclutter
 exec --no-startup-id libinput-gestures-setup start
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -360,7 +364,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id xset dpms 1800 1800 1800 
 exec --no-startup-id xset s 1800 1800 
 exec --no-startup-id /home/near/.scripts/touchpad-config.sh
-exec --no-startup-id xrandr --output HDMI1 --mode 1920x1080 --auto --left-of eDP1
+exec --no-startup-id xrandr --output HDMI1 --mode 1920x1080 --auto --right-of eDP1
 # exec --no-startup-id redshift-gtk
 exec --no-startup-id copyq
 
@@ -539,6 +543,7 @@ exec vmware-user
 exec vmware-user-suid-wrapper --no-startup-id
 
 bindsym $mod+s exec /home/near/.scripts/earbuds-connect.sh
+bindsym $mod+Shift+s exec /home/near/.scripts/earbuds-connect.sh hard
 
 # read 1 character and mark the current window with this character
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1  -P 'Mark: '
@@ -551,6 +556,7 @@ bindsym $mod+Shift+f focus parent; fullscreen; focus child
 
 bindsym $mod+F1 exec monitor-brightness.sh
 bindsym $mod+F2 exec redshift.sh
+bindsym $mod+F3 exec theme-switch-rofi.sh
 
-bindsym $mod+Shift+w exec --no-startup-id /home/near/.scripts/pavucontrol-focus.sh 
+bindsym $mod+w exec --no-startup-id /home/near/.scripts/pavucontrol-focus.sh 
 

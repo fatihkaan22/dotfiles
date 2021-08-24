@@ -11,7 +11,6 @@
 
 /* ########### */
 
-
 * {
   /* General */
   text-font:                            "Comfortaa 12";
@@ -26,6 +25,7 @@
   menu-prompt-margin:                    0px 0px 0px -2px;
   menu-element-border:                   10px;
   menu-element-padding:                  0px 8px 22px -8px;
+
 }
 
 /* ########### */
